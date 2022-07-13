@@ -12,8 +12,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Endereco {
+
     @Id
-    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String cep;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -24,8 +27,11 @@ public class Endereco {
     private String logradouro;
 
     @Column
-    private String numero;
+    private Integer numero;
 
     @Column
     private String cidade;
+
+    @Column
+    private Boolean enderecoPrincipal;
 }
