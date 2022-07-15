@@ -19,10 +19,6 @@ public class Endereco {
 
     private String cep;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pessoa_id")
-    private Pessoa pessoa;
-
     @Column
     private String logradouro;
 
@@ -34,4 +30,8 @@ public class Endereco {
 
     @Column
     private Boolean enderecoPrincipal;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa;
 }

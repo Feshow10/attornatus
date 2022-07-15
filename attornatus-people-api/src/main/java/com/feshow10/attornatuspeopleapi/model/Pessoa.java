@@ -1,5 +1,7 @@
 package com.feshow10.attornatuspeopleapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,7 @@ import java.util.List;
 @Table(name = "tb_pessoas")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +28,7 @@ public class Pessoa {
     @Column
     private LocalDateTime dataDeNascimento;
 
-    @OneToMany(mappedBy = "cep", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Endereco> enderecos = new ArrayList<>();
 }

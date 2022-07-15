@@ -15,10 +15,6 @@ public class EnderecoDto {
     private String cep;
 
     @NotBlank(message = "Preencha o campo corretamente.")
-    @Positive(message = "O Id da pessoa precisa ser positivo.")
-    private Long pessoaId;
-
-    @NotBlank(message = "Preencha o campo corretamente.")
     private String logradouro;
 
     @NotBlank(message = "Preencha o campo corretamente.")
@@ -27,4 +23,11 @@ public class EnderecoDto {
 
     @NotBlank(message = "Preencha o campo corretamente.")
     private String cidade;
+
+    @NotBlank(message = "Preencha o campo corretamente.")
+    private Boolean enderecoPrincipal;
+
+    @NotBlank(message = "Preencha o campo corretamente.")
+    @Positive(message = "O Id da pessoa precisa ser positivo.")
+    private Long pessoaId;
 }

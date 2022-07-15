@@ -30,17 +30,19 @@ public class EnderecoServiceImpl implements EnderecoService {
         endereco.setCep(form.getCep());
         endereco.setNumero(form.getNumero());
         endereco.setCidade(form.getCidade());
+        endereco.setEnderecoPrincipal(form.getEnderecoPrincipal());
 
         return enderecoRepository.save(endereco);
     }
 
     @Override
-    public List<Endereco> get(Long id) {
-        return null;
+    public Optional<Endereco> get(Long id) {
+        return enderecoRepository.findById(id);
     }
+
 
     @Override
     public List<Endereco> getAll() {
-        return null;
+        return enderecoRepository.findAll();
     }
 }

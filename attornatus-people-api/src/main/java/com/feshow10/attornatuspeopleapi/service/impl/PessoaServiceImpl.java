@@ -1,5 +1,6 @@
 package com.feshow10.attornatuspeopleapi.service.impl;
 
+import com.feshow10.attornatuspeopleapi.model.Endereco;
 import com.feshow10.attornatuspeopleapi.model.Pessoa;
 import com.feshow10.attornatuspeopleapi.model.dto.PessoaDto;
 import com.feshow10.attornatuspeopleapi.repository.PessoaRepository;
@@ -29,8 +30,15 @@ public class PessoaServiceImpl implements PessoaService{
         return repository.findById(id);
     }
 
+
     @Override
     public List<Pessoa> getAll() {
         return repository.findAll();
     }
+
+    @Override
+    public List<Endereco> getEnderecos(Long id) {
+        return null;
+    }
+
 }

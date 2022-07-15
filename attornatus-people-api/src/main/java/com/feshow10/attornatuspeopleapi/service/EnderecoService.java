@@ -10,7 +10,7 @@ public interface EnderecoService {
 
     Endereco create(EnderecoDto form);
 
-    List<Endereco> get(Long id);
+    Optional<Endereco> get(Long id);
 
     List<Endereco> getAll();
 }
