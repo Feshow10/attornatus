@@ -1,5 +1,6 @@
 package com.feshow10.attornatuspeopleapi.controller;
 
+import com.feshow10.attornatuspeopleapi.model.Endereco;
 import com.feshow10.attornatuspeopleapi.model.Pessoa;
 import com.feshow10.attornatuspeopleapi.model.dto.PessoaDto;
 import com.feshow10.attornatuspeopleapi.service.impl.PessoaServiceImpl;
@@ -30,6 +31,11 @@ public class PessoaController {
     @GetMapping("/{id}")
     public Optional<Pessoa> get(@PathVariable Long id){
         return service.get(id);
+    }
+
+    @GetMapping("/enderecos/{id}")
+    public List<Endereco> getEnderecos(@PathVariable Long id){
+        return service.getEnderecos(id);
     }
 
 }

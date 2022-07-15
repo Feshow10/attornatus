@@ -38,7 +38,8 @@ public class PessoaServiceImpl implements PessoaService{
 
     @Override
     public List<Endereco> getEnderecos(Long id) {
-        return null;
+        Pessoa pessoa = repository.findById(id).orElseThrow();
+        return pessoa.getEnderecos();
     }
 
 }
