@@ -3,13 +3,14 @@ package com.feshow10.attornatuspeopleapi.service;
 import com.feshow10.attornatuspeopleapi.model.Endereco;
 import com.feshow10.attornatuspeopleapi.model.Pessoa;
 import com.feshow10.attornatuspeopleapi.model.dto.PessoaDto;
+import com.feshow10.attornatuspeopleapi.model.dto.PessoaUpdateDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PessoaService {
 
-    Pessoa create(PessoaDto form);
+    Pessoa salvar(PessoaDto form);
 
     Optional<Pessoa> get(Long id);
 
@@ -17,6 +18,6 @@ public interface PessoaService {
 
     List<Endereco> getEnderecos(Long id);
 
-    //Pessoa update(Long id, PessoaUpdateForm formUpdate);
+    Pessoa update(Long id, PessoaUpdateDto formUpdate);
 
 }
