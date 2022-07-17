@@ -16,7 +16,6 @@ import java.util.List;
 @Table(name = "tb_pessoas")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +28,5 @@ public class Pessoa {
     private LocalDateTime dataDeNascimento;
 
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Endereco> enderecos = new ArrayList<>();
 }
