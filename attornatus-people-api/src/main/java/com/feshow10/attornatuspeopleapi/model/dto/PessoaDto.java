@@ -1,8 +1,7 @@
 package com.feshow10.attornatuspeopleapi.model.dto;
 
-import lombok.AllArgsConstructor;
+import com.feshow10.attornatuspeopleapi.model.Pessoa;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,6 +10,11 @@ import java.time.LocalDateTime;
 
 @Data
 public class PessoaDto {
+
+    public Pessoa transformaParaObjeto(){
+        return new Pessoa(nome, dataDeNascimento);
+    }
+
     @NotBlank(message = "Preencha o campo corretamente.")
     @Size(min = 5, max = 50, message = "'${validatedValue}' precisa estar entre {min} e {max} caracteres.")
     private String nome;

@@ -14,9 +14,14 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "tb_pessoas")
-@AllArgsConstructor
 @NoArgsConstructor
 public class Pessoa {
+
+    public Pessoa(String nome, LocalDateTime dataDeNascimento){
+        this.nome = nome;
+        this.dataDeNascimento = dataDeNascimento;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

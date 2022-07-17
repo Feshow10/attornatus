@@ -18,10 +18,7 @@ public class PessoaServiceImpl implements PessoaService{
     private PessoaRepository pessoaRepository;
 
     @Override
-    public Pessoa salvar(PessoaDto form) {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(form.getNome());
-        pessoa.setDataDeNascimento(form.getDataDeNascimento());
+    public Pessoa salvar(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
 
@@ -36,7 +33,7 @@ public class PessoaServiceImpl implements PessoaService{
         return pessoaRepository.findAll();
     }
 
-    @Override
+    @Override //revisar esse método
     public List<Endereco> getEnderecos(Long id) {
         Pessoa pessoa = pessoaRepository.findById(id).orElseThrow();
         return pessoa.getEnderecos();
