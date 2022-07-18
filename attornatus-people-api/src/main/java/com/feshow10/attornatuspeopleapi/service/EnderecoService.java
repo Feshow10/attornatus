@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface EnderecoService {
 
-    EnderecoDto salvar(EnderecoDto form);
+    Endereco create(EnderecoDto form);
 
     Optional<Endereco> get(Long id);
 

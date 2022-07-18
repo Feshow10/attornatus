@@ -15,55 +15,39 @@ import java.util.Optional;
 public class PessoaServiceImpl implements PessoaService{
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private PessoaRepository repository;
 
     @Override
-    public PessoaDto salvar(PessoaDto dto) {
-        Pessoa pessoa = parseDtoToEntity(dto);
-        pessoa = pessoaRepository.save(pessoa);
-        return parseEntityToDto(pessoa);
+    public Pessoa salvar(PessoaDto form) {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome(form.getNome());
+        pessoa.setDataDeNascimento(form.getDataDeNascimento());
+        return repository.save(pessoa);
     }
 
     @Override
     public Optional<Pessoa> get(Long id) {
-        return pessoaRepository.findById(id);
+        return repository.findById(id);
     }
 
 
     @Override
     public List<Pessoa> getAll() {
-        return pessoaRepository.findAll();
-    }
-
-    public List<Endereco> getEnderecos(Long id) {
-        Pessoa pessoa = pessoaRepository.findById(id).orElseThrow();
-        return pessoa.getEnderecos();
+        return repository.findAll();
     }
 
     @Override
-    public PessoaDto update(Long id, PessoaDto form) {
-        Optional<Pessoa> pessoaAtual = pessoaRepository.findById(id);
-        Pessoa pessoaUpdate = parseDtoToEntity(form);
-        pessoaAtual.get().setNome(pessoaUpdate.getNome());
-        pessoaAtual.get().setDataDeNascimento(pessoaUpdate.getDataDeNascimento());
-        return parseEntityToDto(pessoaRepository.save(pessoaAtual.get()));
+    public List<Endereco> getEnderecos(Long id) {
+        Optional<Pessoa> pessoa = repository.findById(id);
+        return pessoa.get().getEnderecos();
     }
 
-    private Pessoa parseDtoToEntity(PessoaDto dto) {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(dto.getNome());
-        pessoa.setDataDeNascimento(dto.getDataDeNascimento());
-//        pessoa.setEnderecos(dto.getEnderecos());
-        return pessoa;
-    }
-
-    private PessoaDto parseEntityToDto(Pessoa pessoa) {
-        PessoaDto dto = new PessoaDto();
-        dto.setId(pessoa.getId());
-        dto.setNome(pessoa.getNome());
-        dto.setDataDeNascimento(pessoa.getDataDeNascimento());
-//        dto.setEnderecos(pessoa.getEnderecos());
-        return dto;
+    @Override
+    public Pessoa update(Long id, PessoaDto formUpdate) {
+        Optional<Pessoa> pessoaAtual = repository.findById(id);
+        pessoaAtual.get().setNome(formUpdate.getNome());
+        pessoaAtual.get().setDataDeNascimento(formUpdate.getDataDeNascimento());
+        return repository.save(pessoaAtual.get());
     }
 
 }

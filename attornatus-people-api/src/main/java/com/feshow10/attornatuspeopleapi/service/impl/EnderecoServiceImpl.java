@@ -22,11 +22,17 @@ public class EnderecoServiceImpl implements EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     @Override
-    public EnderecoDto salvar(EnderecoDto dto) {
-        Endereco endereco = parseDtoToEntity(dto);
-        endereco = enderecoRepository.save(endereco);
+    public Endereco create(EnderecoDto form) {
+        Endereco endereco = new Endereco();
+        Pessoa pessoa = pessoaRepository.findById(form.getPessoaId()).orElse(null);
+        endereco.setPessoa(pessoa);
+        endereco.setLogradouro(form.getLogradouro());
+        endereco.setCep(form.getCep());
+        endereco.setNumero(form.getNumero());
+        endereco.setCidade(form.getCidade());
+        endereco.setEnderecoPrincipal(form.getEnderecoPrincipal());
 
-        return parseEntityToDto(endereco);
+        return enderecoRepository.save(endereco);
     }
 
     @Override
@@ -39,31 +45,4 @@ public class EnderecoServiceImpl implements EnderecoService {
     public List<Endereco> getAll() {
         return enderecoRepository.findAll();
     }
-
-    private Endereco parseDtoToEntity(EnderecoDto dto) {
-        Endereco endereco = new Endereco();
-        Pessoa pessoa = pessoaRepository.findById(dto.getPessoaId()).orElse(null);
-        endereco.setPessoa(pessoa);
-        endereco.setLogradouro(dto.getLogradouro());
-        endereco.setCep(dto.getCep());
-        endereco.setNumero(dto.getNumero());
-        endereco.setCidade(dto.getCidade());
-        endereco.setEnderecoPrincipal(dto.getEnderecoPrincipal());
-
-        return endereco;
-    }
-
-    private EnderecoDto parseEntityToDto(Endereco endereco) {
-        EnderecoDto dto = new EnderecoDto();
-        dto.setId(endereco.getId());
-        dto.setPessoaId(endereco.getId());
-        dto.setLogradouro(endereco.getLogradouro());
-        dto.setCep(endereco.getCep());
-        dto.setNumero(endereco.getNumero());
-        dto.setCidade(endereco.getCidade());
-        dto.setEnderecoPrincipal(endereco.getEnderecoPrincipal());
-
-        return dto;
-    }
-
 }

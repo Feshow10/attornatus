@@ -32,6 +32,6 @@ public class Endereco {
     private Boolean enderecoPrincipal;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pessoa_id")
+    @JoinColumn(name = "pessoa_id", nullable = false)
     private Pessoa pessoa;
 }

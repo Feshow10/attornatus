@@ -14,14 +14,10 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "tb_pessoas")
+@AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Pessoa {
-
-    public Pessoa(String nome, LocalDateTime dataDeNascimento){
-        this.nome = nome;
-        this.dataDeNascimento = dataDeNascimento;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,5 +29,6 @@ public class Pessoa {
     private LocalDateTime dataDeNascimento;
 
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Endereco> enderecos = new ArrayList<>();
 }

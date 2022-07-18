@@ -18,22 +18,21 @@ import java.util.Optional;
 public class PessoaController {
 
     @Autowired
-    private PessoaServiceImpl pessoaService;
+    private PessoaServiceImpl service;
 
     @PostMapping
-    public ResponseEntity<PessoaDto> salvar(@Valid @RequestBody PessoaDto dto) {
-        dto = pessoaService.salvar(dto);
-        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    public ResponseEntity<Pessoa> salvar(@Valid @RequestBody PessoaDto form){
+        return new ResponseEntity<>(service.salvar(form), HttpStatus.CREATED);
     }
 
     @GetMapping
     public List<Pessoa> getAll(){
-        return pessoaService.getAll();
+        return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Pessoa>> get(@Valid @PathVariable Long id) {
-        Optional<Pessoa> pessoa = pessoaService.get(id);
+    public ResponseEntity<Optional<Pessoa>> get(@PathVariable Long id){
+        Optional<Pessoa> pessoa = service.get(id);
         if (pessoa.isPresent()){
             return ResponseEntity.ok(pessoa);
         }
@@ -42,19 +41,19 @@ public class PessoaController {
 
     @GetMapping("/{id}/enderecos")
     public ResponseEntity<List<Endereco>> getEnderecos(@PathVariable Long id){
-        Optional<Pessoa> pessoa = pessoaService.get(id);
+        Optional<Pessoa> pessoa = service.get(id);
         if (pessoa.isPresent()){
-            return ResponseEntity.ok(pessoaService.getEnderecos(id));
+            return ResponseEntity.ok(pessoa.get().getEnderecos());
         }
         return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PessoaDto> update(@PathVariable Long id,@Valid @RequestBody PessoaDto form) {
-        Optional<Pessoa> pessoaAtual = pessoaService.get(id);
+    public ResponseEntity<Pessoa> update(@PathVariable Long id,@Valid @RequestBody PessoaDto form) {
+        Optional<Pessoa> pessoaAtual = service.get(id);
         if (pessoaAtual.isPresent()){
-            PessoaDto pessoa = pessoaService.update(id,form);
-            return ResponseEntity.ok(pessoa);
+            Pessoa pessoaAtualizada = service.update(id, form);
+            return ResponseEntity.ok(pessoaAtualizada);
         }
         return ResponseEntity.notFound().build();
     }

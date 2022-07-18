@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface PessoaService {
 
-    PessoaDto salvar(PessoaDto form);
+    Pessoa salvar(PessoaDto form);
 
     Optional<Pessoa> get(Long id);
 
@@ -17,6 +17,6 @@ public interface PessoaService {
 
     List<Endereco> getEnderecos(Long id);
 
-    PessoaDto update(Long id, PessoaDto formUpdate);
+    Pessoa update(Long id, PessoaDto formUpdate);
 
 }
