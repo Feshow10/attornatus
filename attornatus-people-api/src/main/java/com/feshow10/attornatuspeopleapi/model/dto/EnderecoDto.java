@@ -9,7 +9,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Data
-@AllArgsConstructor
 public class EnderecoDto {
     @NotBlank(message = "O campo não pode ficar vazio.")
     @Size(min = 8, max = 9, message = "'${validatedValue}' precisa estar entre {min} e {max} caracteres.")
