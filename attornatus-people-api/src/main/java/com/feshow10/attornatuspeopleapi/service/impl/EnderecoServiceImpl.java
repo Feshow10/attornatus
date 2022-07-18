@@ -3,7 +3,6 @@ package com.feshow10.attornatuspeopleapi.service.impl;
 import com.feshow10.attornatuspeopleapi.model.Endereco;
 import com.feshow10.attornatuspeopleapi.model.Pessoa;
 import com.feshow10.attornatuspeopleapi.model.dto.EnderecoDto;
-import com.feshow10.attornatuspeopleapi.model.dto.PessoaDto;
 import com.feshow10.attornatuspeopleapi.repository.EnderecoRepository;
 import com.feshow10.attornatuspeopleapi.repository.PessoaRepository;
 import com.feshow10.attornatuspeopleapi.service.EnderecoService;
@@ -56,9 +55,9 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     private EnderecoDto parseEntityToDto(Endereco endereco) {
         EnderecoDto dto = new EnderecoDto();
+        dto.setId(endereco.getId());
         dto.setPessoaId(endereco.getId());
         dto.setLogradouro(endereco.getLogradouro());
-        dto.setCep(endereco.getCep());
         dto.setCep(endereco.getCep());
         dto.setNumero(endereco.getNumero());
         dto.setCidade(endereco.getCidade());

@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public interface PessoaService {
 
-    PessoaDto salvar(PessoaDto form); //OK
+    PessoaDto salvar(PessoaDto form);
 
-    Optional<Pessoa> get(Long id); //OK
+    Optional<Pessoa> get(Long id);
 
-    List<Pessoa> getAll(); //OK
+    List<Pessoa> getAll();
 
     List<Endereco> getEnderecos(Long id);
 

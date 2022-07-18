@@ -1,5 +1,7 @@
 package com.feshow10.attornatuspeopleapi.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.feshow10.attornatuspeopleapi.model.Endereco;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 public class PessoaDto {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
     @NotBlank(message = "Preencha o campo corretamente.")
@@ -18,4 +21,7 @@ public class PessoaDto {
 
     @NotNull(message = "Preencha o campo corretamente.")
     private LocalDateTime dataDeNascimento;
+
+//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    private List<Endereco> enderecos = new ArrayList<>();
 }

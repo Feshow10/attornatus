@@ -35,7 +35,6 @@ public class PessoaServiceImpl implements PessoaService{
         return pessoaRepository.findAll();
     }
 
-    @Override
     public List<Endereco> getEnderecos(Long id) {
         Pessoa pessoa = pessoaRepository.findById(id).orElseThrow();
         return pessoa.getEnderecos();
@@ -54,6 +53,7 @@ public class PessoaServiceImpl implements PessoaService{
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(dto.getNome());
         pessoa.setDataDeNascimento(dto.getDataDeNascimento());
+//        pessoa.setEnderecos(dto.getEnderecos());
         return pessoa;
     }
 
@@ -62,6 +62,7 @@ public class PessoaServiceImpl implements PessoaService{
         dto.setId(pessoa.getId());
         dto.setNome(pessoa.getNome());
         dto.setDataDeNascimento(pessoa.getDataDeNascimento());
+//        dto.setEnderecos(pessoa.getEnderecos());
         return dto;
     }
 

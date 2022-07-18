@@ -41,8 +41,12 @@ public class PessoaController {
     }
 
     @GetMapping("/{id}/enderecos")
-    public List<Endereco> getEnderecos(@Valid @PathVariable Long id){
-        return pessoaService.getEnderecos(id);
+    public ResponseEntity<List<Endereco>> getEnderecos(@PathVariable Long id){
+        Optional<Pessoa> pessoa = pessoaService.get(id);
+        if (pessoa.isPresent()){
+            return ResponseEntity.ok(pessoaService.getEnderecos(id));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
