@@ -18,8 +18,10 @@ public class PessoaServiceImpl implements PessoaService{
     private PessoaRepository pessoaRepository;
 
     @Override
-    public Pessoa salvar(Pessoa pessoa) {
-        return pessoaRepository.save(pessoa);
+    public PessoaDto salvar(PessoaDto dto) {
+        Pessoa pessoa = parseDtoToEntity(dto);
+        pessoa = pessoaRepository.save(pessoa);
+        return parseEntityToDto(pessoa);
     }
 
     @Override
@@ -33,18 +35,34 @@ public class PessoaServiceImpl implements PessoaService{
         return pessoaRepository.findAll();
     }
 
-    @Override //revisar esse método
+    @Override
     public List<Endereco> getEnderecos(Long id) {
         Pessoa pessoa = pessoaRepository.findById(id).orElseThrow();
         return pessoa.getEnderecos();
     }
 
     @Override
-    public Pessoa update(Long id, PessoaDto formUpdate) {
+    public PessoaDto update(Long id, PessoaDto form) {
         Optional<Pessoa> pessoaAtual = pessoaRepository.findById(id);
-        pessoaAtual.get().setNome(formUpdate.getNome());
-        pessoaAtual.get().setDataDeNascimento(formUpdate.getDataDeNascimento());
-        return pessoaRepository.save(pessoaAtual.get());
+        Pessoa pessoaUpdate = parseDtoToEntity(form);
+        pessoaAtual.get().setNome(pessoaUpdate.getNome());
+        pessoaAtual.get().setDataDeNascimento(pessoaUpdate.getDataDeNascimento());
+        return parseEntityToDto(pessoaRepository.save(pessoaAtual.get()));
+    }
+
+    private Pessoa parseDtoToEntity(PessoaDto dto) {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome(dto.getNome());
+        pessoa.setDataDeNascimento(dto.getDataDeNascimento());
+        return pessoa;
+    }
+
+    private PessoaDto parseEntityToDto(Pessoa pessoa) {
+        PessoaDto dto = new PessoaDto();
+        dto.setId(pessoa.getId());
+        dto.setNome(pessoa.getNome());
+        dto.setDataDeNascimento(pessoa.getDataDeNascimento());
+        return dto;
     }
 
 }

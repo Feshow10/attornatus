@@ -8,9 +8,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
-public class PessoaDto {
-
-    private Long id;
+public class PessoaRequestDto {
 
     @NotBlank(message = "Preencha o campo corretamente.")
     @Size(min = 5, max = 50, message = "'${validatedValue}' precisa estar entre {min} e {max} caracteres.")

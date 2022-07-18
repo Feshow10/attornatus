@@ -21,9 +21,9 @@ public class PessoaController {
     private PessoaServiceImpl pessoaService;
 
     @PostMapping
-    public ResponseEntity<Pessoa> salvar(@Valid @RequestBody PessoaDto dto) {
-        Pessoa pessoa = pessoaService.salvar(dto.transformaParaObjeto());
-        return new ResponseEntity<>(pessoa, HttpStatus.CREATED);
+    public ResponseEntity<PessoaDto> salvar(@Valid @RequestBody PessoaDto dto) {
+        dto = pessoaService.salvar(dto);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -40,16 +40,16 @@ public class PessoaController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/enderecos/{id}")
-    public List<Endereco> getEnderecos(@PathVariable Long id){
+    @GetMapping("/{id}/enderecos")
+    public List<Endereco> getEnderecos(@Valid @PathVariable Long id){
         return pessoaService.getEnderecos(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pessoa> update(@Valid @PathVariable Long id, @RequestBody PessoaDto form) {
+    public ResponseEntity<PessoaDto> update(@PathVariable Long id,@Valid @RequestBody PessoaDto form) {
         Optional<Pessoa> pessoaAtual = pessoaService.get(id);
         if (pessoaAtual.isPresent()){
-            Pessoa pessoa = pessoaService.update(id, form);
+            PessoaDto pessoa = pessoaService.update(id,form);
             return ResponseEntity.ok(pessoa);
         }
         return ResponseEntity.notFound().build();

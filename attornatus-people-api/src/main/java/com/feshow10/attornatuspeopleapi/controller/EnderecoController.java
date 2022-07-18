@@ -5,6 +5,8 @@ import com.feshow10.attornatuspeopleapi.model.dto.EnderecoDto;
 import com.feshow10.attornatuspeopleapi.service.impl.EnderecoServiceImpl;
 import com.feshow10.attornatuspeopleapi.service.impl.PessoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,8 +24,9 @@ public class EnderecoController {
     private PessoaServiceImpl pessoaService;
 
     @PostMapping
-    public Endereco create(@Valid @RequestBody EnderecoDto form){
-        return enderecoService.create(form);
+    public ResponseEntity<EnderecoDto> create(@Valid @RequestBody EnderecoDto dto){
+        dto = enderecoService.salvar(dto);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
     @GetMapping
